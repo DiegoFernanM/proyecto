@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buscador con Geolocalización</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    text-align: center;
+}
+
+.input-container {
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #e53930; /* Color cambiado */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #c62828; /* Color cambiado */
+}
+
+.button-secondary {
+    background-color: #6c757d;
+}
+
+.button-secondary:hover {
+    background-color: #5a6268;
+}
+
+.logo {
+    margin-bottom: 20px;
+}
+
+.categorias {
+    margin-top: 20px;
+}
+
+.categorias h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.categorias ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.categorias ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+.categorias ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #ddd;
+}
+
+.categorias ul li a:hover {
+    background-color: #ccc;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <img src="https://descubredirectorio.com/bogota/wp-content/uploads/2024/02/LOGO-DESCUBRE-BOGOTA-copia.png" alt="Logo Descubre Bogotá" class="logo">
+    <div class="input-container">
+        <input type="text" id="inputBusqueda" placeholder="Buscar...">
+    </div>
+    <button onclick="buscar()" class="button-primary">Buscar</button>
+    <button onclick="obtenerUbicacion()" class="button-secondary">Obtener Ubicación</button>
+</div>
+
+<div class="categorias">
+    <h2>Buscar por categorías:</h2>
+    <ul>
+        <li><a href="https://descubredirectorio.com/Bogot%C3%A1/index.php/comercios/category/electricos-y-iluminaciones/" target="_blank">Eléctricos e Iluminaciones</a></li>
+        <li><a href="https://descubredirectorio.com/Bogot%C3%A1/index.php/comercios/category/restaurantes/" target="_blank">Restaurantes</a></li>
+    </ul>
+</div>
+
+<script>
+function buscar() {
+    var input = document.getElementById("inputBusqueda").value;
+    var url = `https://descubredirectorio.com/Bogot%C3%A1/index.php/search-page/?geodir_search=1&stype=gd_place&s=${input}&snear=&spost_category%5B%5D=&sgeo_lat=&sgeo_lon=&near=me`;
+
+    // Redirigir a la URL con los parámetros
+    window.location.href = url;
+}
+
+function obtenerUbicacion() {
+    var geoloc = navigator.geolocation;
+
+    if (geoloc) {
+        geoloc.getCurrentPosition(function(position) {
+            alert('Tu ubicación ha sido seleccionada. Haz clic en "Buscar" para continuar.');
+        }, function(error) {
+            console.error('Error al obtener la ubicación: ', error.message);
+        });
+    } else {
+        console.error('La geolocalización no está disponible en este navegador.');
+    }
+}
+</script>
+
+</body>
+</html>
